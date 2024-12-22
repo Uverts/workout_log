@@ -1,7 +1,7 @@
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import WorkoutsPage from './pages/WorkoutsPage'; 
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
+import WorkoutsPage from './pages/WorkoutsPage'
 import Header from './components/Header'
-import './index.css';
+import './index.css'
 
 function App() {
   return (
@@ -13,7 +13,7 @@ function App() {
         </Routes>
       </div>
     </Router>
-  );
+  )
 }
 
-export default App;
+export default App

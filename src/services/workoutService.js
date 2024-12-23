@@ -3,6 +3,7 @@ import {
   query,
   where,
   getDocs,
+  addDoc,
   Timestamp,
 } from 'firebase/firestore'
 import { db } from '@src/firebase/firebase.js'
@@ -21,4 +22,12 @@ export const getWorkouts = async (startDate, endDate) => {
   }))
 
   return workouts
+}
+
+export const addWorkout = async (date, workoutType, { exercises }) => {
+  await addDoc(collection(db, 'workouts'), {
+    date: Timestamp.fromDate(date),
+    workoutType,
+    exercises,
+  })
 }

@@ -7,7 +7,7 @@ export default function CreateWorkoutPage() {
   const [date, setDate] = useState(new Date())
 
   return (
-    <div className="flex min-h-screen">
+    <div className="flex h-screen">
       <div className="w-1/3 bg-red-400 p-4">
         <Calendar value={date} onChange={(d) => setDate(d)} />
       </div>

@@ -21,7 +21,7 @@ export default function WorkoutsPage() {
   }, [fetchWorkouts])
 
   return (
-    <div className="flex min-h-screen">
+    <div className="flex h-screen">
       <div className="w-1/3 bg-red-400 p-4">
         <Calendar
           selectRange={true}

@@ -1,9 +1,9 @@
-import { useState, useEffect, useCallback } from 'react'
+import { useState, useEffect } from 'react'
 import Calendar from 'react-calendar'
 import 'react-calendar/dist/Calendar.css'
-import { getWorkouts } from '../services/workoutService'
-import Heading from '../components/Heading'
-import WorkoutList from '../components/WorkoutList'
+import { getWorkouts } from '@src/services/workoutService'
+import Heading from '@src/components/Heading'
+import WorkoutList from '@src/components/WorkoutList'
 
 export default function WorkoutsPage() {
   const [workouts, setWorkouts] = useState([])
@@ -12,13 +12,12 @@ export default function WorkoutsPage() {
   const endDate = dateRange[1]?.toDateString()
   const headingText = `Workouts in ${startDate} - ${endDate}`
 
-  const fetchWorkouts = useCallback(async () => {
-    setWorkouts(await getWorkouts(dateRange[0], dateRange[1]))
-  }, [dateRange])
-
   useEffect(() => {
+    const fetchWorkouts = async () => {
+      setWorkouts(await getWorkouts(dateRange[0], dateRange[1]))
+    }
     fetchWorkouts()
-  }, [fetchWorkouts])
+  }, [dateRange])
 
   return (
     <div className="flex h-screen">

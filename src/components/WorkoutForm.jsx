@@ -1,21 +1,21 @@
 import PropTypes from 'prop-types'
 import { useState } from 'react'
 import { TrashIcon } from '@heroicons/react/outline'
-import { addWorkout } from '../services/workoutService'
+import { addWorkout } from '@src/services/workoutService'
 
 export default function WorkoutForm({ date }) {
   const [exercises, setExercises] = useState([{ name: '', sets: '', reps: '' }])
   const [workoutType, setWorkoutType] = useState('')
   const [error, setError] = useState(false)
 
-  const addExercise = () => {
+  const handleAddExercise = () => {
     setExercises([...exercises, { name: '', sets: '', reps: '' }])
   }
-  const deleteExercise = (idx) => {
+  const handleDeleteExercise = (idx) => {
     setExercises(exercises.filter((_, i) => i !== idx))
   }
 
-  const updateExerciseField = (idx, field, updatedValue) => {
+  const handleOnChange = (idx, field, updatedValue) => {
     setExercises(
       exercises.map((exercise, i) => {
         if (i === idx) {
@@ -61,30 +61,24 @@ export default function WorkoutForm({ date }) {
                 className="w-2/4 rounded-lg p-2 mr-2"
                 placeholder="Exercise Name"
                 value={exercise.name}
-                onChange={(e) =>
-                  updateExerciseField(idx, 'name', e.target.value)
-                }
+                onChange={(e) => handleOnChange(idx, 'name', e.target.value)}
               />
               <input
                 className="w-1/4 rounded-lg p-2 mr-2"
                 type="number"
                 placeholder="Sets"
                 value={exercise.sets}
-                onChange={(e) =>
-                  updateExerciseField(idx, 'sets', e.target.value)
-                }
+                onChange={(e) => handleOnChange(idx, 'sets', e.target.value)}
               />
               <input
                 className="w-1/4 rounded-lg p-2"
                 type="number"
                 placeholder="Reps"
                 value={exercise.reps}
-                onChange={(e) =>
-                  updateExerciseField(idx, 'reps', e.target.value)
-                }
+                onChange={(e) => handleOnChange(idx, 'reps', e.target.value)}
               />
               <button
-                onClick={() => deleteExercise(idx)}
+                onClick={() => handleDeleteExercise(idx)}
                 type="button"
                 className="h-5 w-5 m-2"
               >
@@ -95,7 +89,7 @@ export default function WorkoutForm({ date }) {
         ))}
 
         <button
-          onClick={addExercise}
+          onClick={handleAddExercise}
           type="button"
           className="w-1/4 bg-white p-3 rounded-lg"
         >

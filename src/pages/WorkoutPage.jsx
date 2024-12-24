@@ -1,6 +1,6 @@
 import { useParams } from 'react-router-dom'
 import { TrashIcon } from '@heroicons/react/outline'
-import { useEffect, useState, useCallback } from 'react'
+import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { getWorkout, deleteWorkout } from '../services/workoutService'
 import ExerciseList from '../components/ExerciseList'
@@ -11,14 +11,13 @@ export default function WorkoutPage() {
   const [loading, setLoading] = useState(true)
   const navigate = useNavigate()
 
-  const fetchWorkout = useCallback(async (workoutId) => {
-    setWorkout(await getWorkout(workoutId))
-    setLoading(false)
-  }, [])
-
   useEffect(() => {
+    const fetchWorkout = async (workoutId) => {
+      setWorkout(await getWorkout(workoutId))
+      setLoading(false)
+    }
     fetchWorkout(workoutId)
-  }, [fetchWorkout, workoutId])
+  }, [workoutId])
 
   const handleDelete = () => {
     navigate(-1)

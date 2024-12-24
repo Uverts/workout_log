@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import Calendar from 'react-calendar'
 import 'react-calendar/dist/Calendar.css'
-import WorkoutForm from '../components/WorkoutForm'
+import WorkoutForm from '@src/components/WorkoutForm'
 
 export default function CreateWorkoutPage() {
   const [date, setDate] = useState(new Date())

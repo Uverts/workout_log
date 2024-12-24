@@ -6,6 +6,7 @@ import {
   getDocs,
   getDoc,
   addDoc,
+  deleteDoc,
   Timestamp,
 } from 'firebase/firestore'
 import { db } from '@src/firebase/firebase.js'
@@ -39,4 +40,9 @@ export const addWorkout = async (date, workoutType, { exercises }) => {
     workoutType,
     exercises,
   })
+}
+
+export const deleteWorkout = async (workoutId) => {
+  console.log(workoutId)
+  await deleteDoc(doc(db, 'workouts', workoutId))
 }

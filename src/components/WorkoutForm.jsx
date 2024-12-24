@@ -6,13 +6,12 @@ import { addWorkout } from '../services/workoutService'
 export default function WorkoutForm({ date }) {
   const [exercises, setExercises] = useState([{ name: '', sets: '', reps: '' }])
   const [workoutType, setWorkoutType] = useState('')
+  const [error, setError] = useState(false)
 
-  const addExercise = (e) => {
-    e.preventDefault()
+  const addExercise = () => {
     setExercises([...exercises, { name: '', sets: '', reps: '' }])
   }
-  const deleteExercise = (e, idx) => {
-    e.preventDefault()
+  const deleteExercise = (idx) => {
     setExercises(exercises.filter((_, i) => i !== idx))
   }
 
@@ -30,10 +29,19 @@ export default function WorkoutForm({ date }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault()
-    // add validation
-    await addWorkout(date, workoutType, { exercises })
-
-    setExercises([{ name: '', sets: '', reps: '' }])
+    const emptyFields = exercises.some(
+      (exercise) =>
+        exercise.name.trim() === '' ||
+        exercise.sets.trim() === '' ||
+        exercise.reps.trim() === ''
+    )
+    if (emptyFields) {
+      setError(true)
+    } else {
+      setError(false)
+      await addWorkout(date, workoutType, { exercises })
+      setExercises([{ name: '', sets: '', reps: '' }])
+    }
   }
 
   return (
@@ -59,6 +67,7 @@ export default function WorkoutForm({ date }) {
               />
               <input
                 className="w-1/4 rounded-lg p-2 mr-2"
+                type="number"
                 placeholder="Sets"
                 value={exercise.sets}
                 onChange={(e) =>
@@ -67,6 +76,7 @@ export default function WorkoutForm({ date }) {
               />
               <input
                 className="w-1/4 rounded-lg p-2"
+                type="number"
                 placeholder="Reps"
                 value={exercise.reps}
                 onChange={(e) =>
@@ -74,7 +84,8 @@ export default function WorkoutForm({ date }) {
                 }
               />
               <button
-                onClick={(e) => deleteExercise(e, idx)}
+                onClick={() => deleteExercise(idx)}
+                type="button"
                 className="h-5 w-5 m-2"
               >
                 <TrashIcon className="stroke-white" />
@@ -83,16 +94,24 @@ export default function WorkoutForm({ date }) {
           </div>
         ))}
 
-        <button onClick={addExercise} className="w-1/4 bg-white p-3 rounded-lg">
+        <button
+          onClick={addExercise}
+          type="button"
+          className="w-1/4 bg-white p-3 rounded-lg"
+        >
           Add exercise
         </button>
         <button
           onClick={handleSubmit}
+          type="submit"
           className="w-full bg-white p-3 mt-5 rounded-lg"
         >
           Submit
         </button>
       </form>
+      {error && (
+        <div className="bg-white text-red-500 mb-4 p-1">Invalid input</div>
+      )}
     </div>
   )
 }

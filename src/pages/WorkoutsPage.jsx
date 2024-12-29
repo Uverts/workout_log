@@ -5,11 +5,8 @@ import { HeartIcon } from '@heroicons/react/outline'
 import { getWorkouts } from '@src/services/workoutService'
 import Heading from '@src/components/Heading'
 import WorkoutList from '@src/components/WorkoutList'
-import {
-  getStartOfMonth,
-  getEndOfMonth,
-  getWorkoutCounts,
-} from '@src/utils/dateUtil'
+import { getWorkoutCounts } from '@src/utils/dataUtil'
+import { getStartOfMonth, getEndOfMonth } from '@src/utils/dateUtil'
 
 export default function WorkoutsPage() {
   const [workouts, setWorkouts] = useState([])

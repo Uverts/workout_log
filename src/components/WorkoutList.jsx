@@ -8,7 +8,7 @@ export default function WorkoutList({ data }) {
         {data.map((workout) => (
           <li
             key={workout.id}
-            className="w-3/4 bg-red-400 shadow-lg rounded-2xl border-1 mx-auto text-center p-4 m-2"
+            className="w-3/4 bg-theme shadow-lg rounded-2xl border-1 mx-auto text-center p-4 m-2"
           >
             <Link to={workout.id}>
               <p className="font-bold text-white">{workout.workoutType}</p>

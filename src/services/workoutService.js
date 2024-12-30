@@ -11,10 +11,11 @@ import {
 } from 'firebase/firestore'
 import { db } from '@src/firebase/firebase.js'
 
-export const getWorkouts = async (startDate, endDate) => {
+export const getWorkouts = async (uid, startDate, endDate) => {
   try {
     const q = query(
       collection(db, 'workouts'),
+      where('uid', '==', uid),
       where('date', '>=', Timestamp.fromDate(startDate)),
       where('date', '<=', Timestamp.fromDate(endDate))
     )
@@ -42,9 +43,11 @@ export const getWorkout = async (workoutId) => {
   }
 }
 
-export const addWorkout = async (date, workoutType, { exercises }) => {
+export const addWorkout = async (uid, date, workoutType, { exercises }) => {
+  console.log(uid)
   try {
     await addDoc(collection(db, 'workouts'), {
+      uid,
       date: Timestamp.fromDate(date),
       workoutType,
       exercises,

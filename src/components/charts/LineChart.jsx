@@ -19,8 +19,7 @@ ChartJS.register(
   Legend
 )
 
-export default function LineChart({ data }){
-
+export default function LineChart({ data }) {
   const linehartData = {
     labels: data.map((item) => item.date.toDateString()),
     datasets: [

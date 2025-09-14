@@ -5,7 +5,7 @@ export default function WorkoutList({ data }) {
   return (
     <div className="w-full">
       <ul>
-        {data.map((workout) => (
+        {data?.map((workout) => (
           <li
             key={workout.id}
             className="w-3/4 bg-theme shadow-lg rounded-2xl border-1 mx-auto text-center p-4 m-2"

@@ -21,10 +21,10 @@ ChartJS.register(
 
 export default function LineChart({ data }) {
   const linehartData = {
-    labels: data.map((item) => item.date.toDateString()),
+    labels: data?.map((item) => item.date.toDateString()),
     datasets: [
       {
-        data: data.map((item) => item.weight),
+        data: data?.map((item) => item.weight),
         label: 'Weight',
         borderColor: 'dark',
       },
